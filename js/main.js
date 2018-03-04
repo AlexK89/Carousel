@@ -28,14 +28,14 @@ function carousel(carouselArrow, direction) {
 	}
 }
 
-function moveToNextImage(carouselImages, i, direction) {
-	let newImagePosition = i + direction;
+function moveToNextImage(carouselImages, newImagePosition, direction) {
+	newImagePosition += direction;
 
 	switch (true) {
-		case (carouselImages[newImagePosition] === undefined && direction > 0):
+		case (!carouselImages[newImagePosition] && direction > 0):
 			carouselImages[0].classList.add('active');
 			break;
-		case (carouselImages[newImagePosition] === undefined && direction < 0):
+		case (!carouselImages[newImagePosition] && direction < 0):
 			carouselImages[carouselImages.length - 1].classList.add('active');
 			break;
 		default:
