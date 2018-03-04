@@ -31,11 +31,14 @@ function carousel(carouselArrow, direction) {
 function moveToNextImage(carouselImages, i, direction) {
 	let newImagePosition = i + direction;
 
-	if (carouselImages[newImagePosition] === undefined && direction > 0) {
-		carouselImages[0].classList.add('active');
-	} else if (carouselImages[newImagePosition] === undefined && direction < 0) {
-		carouselImages[carouselImages.length - 1].classList.add('active');
-	} else {
-		carouselImages[newImagePosition].classList.add('active');
+	switch (true) {
+		case (carouselImages[newImagePosition] === undefined && direction > 0):
+			carouselImages[0].classList.add('active');
+			break;
+		case (carouselImages[newImagePosition] === undefined && direction < 0):
+			carouselImages[carouselImages.length - 1].classList.add('active');
+			break;
+		default:
+			carouselImages[newImagePosition].classList.add('active');
 	}
 }
