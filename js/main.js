@@ -22,30 +22,20 @@ function carousel(carouselArrow, direction) {
 		if (carouselImages[i].classList.contains('active')) {
 			carouselImages[i].classList.remove('active');
 
-			if (direction >= 0) {
-				moveToTheRight(carouselImages, i);
-			} else {
-				moveToTheLeft(carouselImages, i);
-			}
+			moveToNextImage(carouselImages, i, direction);
 			break;
 		}
 	}
 }
 
-function moveToTheLeft(carouselImages, i) {
-	let position = --i;
-	if (carouselImages[position] === undefined) {
+function moveToNextImage(carouselImages, i, direction) {
+	let newImagePosition = i + direction;
+
+	if (carouselImages[newImagePosition] === undefined && direction > 0) {
+		carouselImages[0].classList.add('active');
+	} else if (carouselImages[newImagePosition] === undefined && direction < 0) {
 		carouselImages[carouselImages.length - 1].classList.add('active');
 	} else {
-		carouselImages[position].classList.add('active');
-	}
-}
-
-function moveToTheRight(carouselImages, i) {
-	let position = ++i;
-	if (carouselImages[position] === undefined) {
-		carouselImages[0].classList.add('active');
-	} else {
-		carouselImages[position].classList.add('active');
+		carouselImages[newImagePosition].classList.add('active');
 	}
 }
