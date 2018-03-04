@@ -33,17 +33,19 @@ function carousel(carouselArrow, direction) {
 }
 
 function moveToTheLeft(carouselImages, i) {
-	if (carouselImages[i - 1] === undefined) {
+	let position = --i;
+	if (carouselImages[position] === undefined) {
 		carouselImages[carouselImages.length - 1].classList.add('active');
 	} else {
-		carouselImages[i - 1].classList.add('active');
+		carouselImages[position].classList.add('active');
 	}
 }
 
 function moveToTheRight(carouselImages, i) {
-	if (carouselImages[i + 1] === undefined) {
+	let position = ++i;
+	if (carouselImages[position] === undefined) {
 		carouselImages[0].classList.add('active');
 	} else {
-		carouselImages[i + 1].classList.add('active');
+		carouselImages[position].classList.add('active');
 	}
 }
