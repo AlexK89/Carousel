@@ -4,10 +4,11 @@ const carouselArrows = document.querySelectorAll('.carousel__arrows');
 for (let carouselArrow of carouselArrows) {
 	carouselArrow.addEventListener('click', function () {
 		changeImage(this);
+
 	})
 }
 
-function changeImage(arrow = document.querySelector('.right_arrow')) {
+function changeImage(arrow) {
 	if (arrow.classList.contains('left_arrow')) {
 		switchCarouselImage(arrow, -1);
 	}
@@ -50,7 +51,7 @@ for (const carousel of carousels) {
 	const interval = carousel.dataset.interval * 1000;
 	const nextArrow = carousel.querySelector('.right_arrow');
 
-	const definedInterval = setInterval(()=> {
+	setInterval(() => {
 		changeImage(nextArrow);
 	}, interval);
 }
