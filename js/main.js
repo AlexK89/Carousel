@@ -1,3 +1,4 @@
+const carousels = document.querySelectorAll('.carousel');
 const carouselArrows = document.querySelectorAll('.carousel__arrows');
 
 for (let carouselArrow of carouselArrows) {
@@ -6,16 +7,20 @@ for (let carouselArrow of carouselArrows) {
 	})
 }
 
-function changeImage(arrow) {
+function changeImage(arrow, definedInterval) {
+	clearInterval(definedInterval);
+
 	if (arrow.classList.contains('left_arrow')) {
-		carousel(arrow, -1);
+		switchCarouselImage(arrow, -1);
 	}
 	if (arrow.classList.contains('right_arrow')) {
-		carousel(arrow, 1)
+		switchCarouselImage(arrow, 1)
 	}
+
+	defineInterval();
 }
 
-function carousel(carouselArrow, direction) {
+function switchCarouselImage(carouselArrow, direction) {
 	const carouselImages = carouselArrow.parentNode.querySelectorAll('.images img');
 
 	for (let i = 0; i < carouselImages.length; i++) {
@@ -40,5 +45,17 @@ function moveToNextImage(carouselImages, newImagePosition, direction) {
 			break;
 		default:
 			carouselImages[newImagePosition].classList.add('active');
+	}
+}
+
+// Carousel interval
+function defineInterval() {
+	for (const carousel of carousels) {
+		const interval = carousel.dataset.interval * 1000;
+		const nextArrow = carousel.querySelector('.right_arrow');
+
+		const definedInterval = setInterval(()=> {
+			changeImage(nextArrow, definedInterval);
+		}, interval);
 	}
 }
