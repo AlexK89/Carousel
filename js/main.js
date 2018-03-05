@@ -7,9 +7,8 @@ for (let carouselArrow of carouselArrows) {
 	})
 }
 
-function changeImage(arrow, definedInterval) {
-	clearInterval(definedInterval);
-
+function changeImage(arrow = document.querySelector('.right_arrow')) {
+	// resetInterval(arrow.parentNode);
 	if (arrow.classList.contains('left_arrow')) {
 		switchCarouselImage(arrow, -1);
 	}
@@ -17,7 +16,6 @@ function changeImage(arrow, definedInterval) {
 		switchCarouselImage(arrow, 1)
 	}
 
-	defineInterval();
 }
 
 function switchCarouselImage(carouselArrow, direction) {
@@ -34,6 +32,9 @@ function switchCarouselImage(carouselArrow, direction) {
 }
 
 function moveToNextImage(carouselImages, newImagePosition, direction) {
+	const carousel = carouselImages[newImagePosition].parentNode.parentNode;
+	const interval = carousel.dataset.interval * 1000;
+
 	newImagePosition += direction;
 
 	switch (true) {
@@ -49,13 +50,14 @@ function moveToNextImage(carouselImages, newImagePosition, direction) {
 }
 
 // Carousel interval
-function defineInterval() {
-	for (const carousel of carousels) {
-		const interval = carousel.dataset.interval * 1000;
-		const nextArrow = carousel.querySelector('.right_arrow');
+function resetInterval (carousel) {
+	const interval = carousel.dataset.interval * 1000;
+	const nextArrow = carousel.querySelector('.right_arrow');
 
-		const definedInterval = setInterval(()=> {
-			changeImage(nextArrow, definedInterval);
-		}, interval);
-	}
+	setInterval(()=> {
+		changeImage(nextArrow);
+	}, interval);
+}
+for (const carousel of carousels) {
+	resetInterval(carousel);
 }
